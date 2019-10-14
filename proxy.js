@@ -77,7 +77,7 @@ const ScrapeProxies = async () => {
   );
 };
 
-async function GetRandomProxy(RETURN_MASK = String) {
+async function GetRandomProxy() {
   // RETURN_MASK EXAMPLES = <ip>:<port>, IP:<ip>|PORT:<port>
 
   let RandomProxy = "";
@@ -88,24 +88,16 @@ async function GetRandomProxy(RETURN_MASK = String) {
         State.list[Math.floor(Math.random() * Object.keys(State.list).length)];
       let ip = RandomProxy.split(":")[0];
       let port = RandomProxy.split(":")[1];
-      if (RETURN_MASK)
-        return String(RETURN_MASK)
-          .toLowerCase()
-          .replace("<ip>", ip)
-          .replace("<port>", port);
-      return RandomProxy;
+
+      return { ip, port };
     });
   }
   RandomProxy =
     State.list[Math.floor(Math.random() * Object.keys(State.list).length)];
   let ip = RandomProxy.split(":")[0];
   let port = RandomProxy.split(":")[1];
-  if (RETURN_MASK)
-    return String(RETURN_MASK)
-      .toLowerCase()
-      .replace("<ip>", ip)
-      .replace("<port>", port);
-  return RandomProxy;
+
+  return { ip, port };
 }
 
 module.exports.GetRandom = GetRandomProxy;
